@@ -36,6 +36,12 @@ bool CHARACTER::OpenChestItem(LPITEM item, BYTE bOpenCount)
 	if (!CanHandleItem())
 		return false;
 	
+	if (item->IsExchanging())
+		return false;
+	
+	if (IsStun())
+		return false;
+	
 	DWORD dwGroupNum = item->GetVnum();
 	const CSpecialItemGroup* pGroup = ITEM_MANAGER::instance().GetSpecialItemGroup(dwGroupNum);
 	if (!pGroup)
@@ -81,6 +87,8 @@ bool CHARACTER::OpenChestItem(LPITEM item, BYTE bOpenCount)
 	if (wGivenItems.size() < 1)
 	{
 		ChatPacket(CHAT_TYPE_TALKING, LC_TEXT("아무것도 얻을 수 없었습니다."));
+		if (item)
+			item->Lock(false);
 		return false;
 	}
 	
