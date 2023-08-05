@@ -7,7 +7,7 @@ void CInputMain::ChestOpen(LPCHARACTER ch, const char * data)
 {
 	struct OpenChestPacket * pinfo = (struct OpenChestPacket *) data;
 	if (ch)
-		ch->OpenChest(pinfo->pos, static_cast<WORD>(pinfo->wOpenCount));
+		ch->OpenChestItem(pinfo->pos, static_cast<WORD>(pinfo->wOpenCount));
 }
 #endif
 
