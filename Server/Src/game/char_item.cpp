@@ -91,10 +91,9 @@ bool CHARACTER::OpenChestItem(LPITEM item, BYTE bOpenCount)
 			item->Lock(false);
 		return false;
 	}
-	
+
+	item->Lock(false);
 	item->SetCount(MAX(0, item->GetCount() - loopCount));
-	if (item)
-		item->Lock(false);
 	
 	for (auto& info : wGivenItems)
 	{
